@@ -1,9 +1,9 @@
 const express = require('express');
-const serverConfig =require('./configs/server.config');
+const serverConfig = require('./configs/server.config');
 const app = express();
 const mongoose = require('mongoose');
 const dbConfig = require('./configs/db.config');
-//const usermodel = require('./models/user.model');
+const userModel = require('./models/user.model');
 
 
 /**
@@ -14,32 +14,34 @@ const dbConfig = require('./configs/db.config');
 mongoose.connect(dbConfig.DB_URL);
 const db = mongoose.connection;
 
-db.on("error", ()=>{
+db.on("error", () => {
     console.log("Error while connecting to DB");
 })
 
-db.once("open", ()=>{
+db.once("open", () => {
     console.log("DB is connected");
 
+    init();
 })
 
 
-    // async function init(){
-    //   /**
-    //    * Initialize the mongo db
-    //    * 
-    //    * need to create the ADMIN user
-    //    */
+async function init() {
+    /**
+     * Initialize the mongo db
+     * 
+     * need to create the ADMIN user
+     */
 
-    // const admin = await userModel.create({ 
-    //     name : "Raj gupta",
-    //     userId : "admin",
-    //     email : "raajg7999@gmail.com",
-    //     userType : "ADMIN",
-    //     password : "Welcome1"
-    // })
-//    console.log(admin);
-// }
-app.listen(serverConfig.PORT, ()=>{
+    const admin = await userModel.create({
+        name: "Raj gupta",
+        userId: "admin",
+        email: "raajg7999@gmail.com",
+        userType: "ADMIN",
+        password: "Welcome1"
+    });
+    console.log(admin);
+
+}
+app.listen(serverConfig.PORT, () => {
     console.log(`server started on the port number ${serverConfig.PORT}`);
 })

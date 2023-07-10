@@ -42,4 +42,4 @@ const userSchema = new mongoose.Schema({
     define the collection name where it will be stored
     */
 
-    module.exports = mangoose.model("User", userSchema);
+    module.exports = mongoose.model("User", userSchema);

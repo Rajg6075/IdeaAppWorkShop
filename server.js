@@ -25,7 +25,7 @@ db.once("open", () => {
 })
 
 
-async function init() {
+    async function init(){
     /**
      * Initialize the mongo db
      * 
@@ -41,7 +41,7 @@ async function init() {
         return;
     }
 
-    admin = await usermodel.create ( {
+    admin = await userModel.create({
         name: "Raj gupta",
         userId: "admin",
         email: "raajg7999@gmail.com",
